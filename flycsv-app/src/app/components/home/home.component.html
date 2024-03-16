@@ -1,0 +1,12 @@
+<form>
+    <h2>Upload a CSV</h2>
+    <div class="row mb-3">
+      <div class="col-sm-4">
+        <input type="file" accept=".csv" class="form-control" id="csvfile" (change)="handleFileSelect($event)">
+        <div class="form-text">Please upload a .csv file</div>
+      </div>
+      <!-- <div class="col-sm-6">
+          <button type="button" class="btn btn-sm btn-primary">Upload</button>
+      </div> -->
+    </div>
+  </form>

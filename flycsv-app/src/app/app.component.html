@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <h1>FlyCSV</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex justify-content-end align-items-end">
+      <ng-container *ngIf="user">
+        <span class="login-info">{{user.username}}</span>
+        <button class="btn btn-sm btn-outline-secondary" type="button" (click)="logout()">Logout</button>
+      </ng-container>
+    </div>
+  </div>
+</nav>
+<div class="container my-2 py-3">
+  <router-outlet></router-outlet>
+</div>
