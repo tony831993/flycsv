@@ -1,0 +1,29 @@
+version: '3'
+services:
+  backend:
+    build: ./flycsvBackend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./flycsvBackend:/app
+    depends_on:
+      - db
+
+  frontend:
+    build: ./flycsv-app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./flycsv-app:/app
+    depends_on:
+      - flycsvBackend
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: flycsv
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
