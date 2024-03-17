@@ -1,12 +1,49 @@
 <form>
-    <h2>Upload a CSV</h2>
-    <div class="row mb-3">
-      <div class="col-sm-4">
-        <input type="file" accept=".csv" class="form-control" id="csvfile" (change)="handleFileSelect($event)">
-        <div class="form-text">Please upload a .csv file</div>
-      </div>
-      <!-- <div class="col-sm-6">
-          <button type="button" class="btn btn-sm btn-primary">Upload</button>
-      </div> -->
+  <h3>Upload a CSV</h3>
+  <div class="row my-3">
+    <div class="col-sm-4">
+      <input type="file" accept=".csv" #csvReader class="form-control" id="csvfile" (change)="uploadListener($event)" [disabled]="records.length > 0">
+      <div class="form-text">Please upload a .csv file</div>
     </div>
-  </form>
+    <div class="col-sm-4">
+      <button (click)="saveData()" *ngIf="records.length > 0" class="btn btn-primary mx-2">Save</button>
+      <button (click)="fileReset()" *ngIf="records.length > 0" class="btn btn-dark mx-2">Reset</button>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <div class="table-responsive" *ngIf="records.length > 0">
+        <div class="row my-3">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <input type="search" class="form-control" [(ngModel)]="filter" [ngModelOptions]="{standalone: true}"
+                placeholder="Filter by Employee ID, First Name, Last Name or Salary">
+            </div>
+          </div>
+        </div>
+        <div class="row my-3 records">
+          <div class="col-sm-12">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" sortable="id" (sort)="onSort($event)">#Employee ID</th>
+                  <th scope="col" sortable="firstname" (sort)="onSort($event)">First Name</th>
+                  <th scope="col" sortable="lastname" (sort)="onSort($event)">Last Name</th>
+                  <th scope="col" sortable="salary" (sort)="onSort($event)">Salary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of tableRecords | filterdata :filter">
+                  <th scope="row">{{ record.employee_id }}</th>
+                  <td>{{ record.firstname }}</td>
+                  <td>{{ record.lastname }}</td>
+                  <td>{{ record.salary | number }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -11,7 +11,45 @@ export class UtilityService {
   constructor(private http: HttpClient, private authService: AuthService) {
 
   }
-
+  /**
+   * Save employee data
+   * @param data 
+   * @returns 
+   */
+  saveCsvData(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    const user: any = this.authService.getLoggedInUser();
+    const payload = {
+      user_id: user.id,
+      data
+    };
+    return this.http.post(`${environment.employeeUrl}/savedata`, payload, httpOptions);
+  }
+  /**
+   * Get Employee records
+   * @returns 
+   */
+  getRecords() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    const user: any = this.authService.getLoggedInUser();
+    const payload = {
+      user_id: user.id,
+    };
+    return this.http.post(`${environment.employeeUrl}/getdata`, payload, httpOptions);
+  }
+  /**
+   * Upload CSV data
+   * @param file 
+   * @returns 
+   */
   uploadCsv(file:any) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -23,9 +61,34 @@ export class UtilityService {
       user_id: user.id,
       csv_file: file
     }
-    return this.http.post(`${environment.csvUrl}/upload/`, user, httpOptions)
+    return this.http.post(`${environment.employeeUrl}/csv/upload`, user, httpOptions)
   }
-
+  /**
+   * Check file extension
+   * @param file 
+   * @returns 
+   */
+  isValidCSVFile(file: any) {
+    return file.name.endsWith('.csv');
+  }
+  /**
+   * Get Header Array
+   * @param csvRecordsArr 
+   * @returns 
+   */
+  getHeaderArray(csvRecordsArr: any) {
+    let headers = (<string>csvRecordsArr[0]).split(',');
+    let headerArray = [];
+    for (let j = 0; j < headers.length; j++) {
+      headerArray.push(headers[j]);
+    }
+    return headerArray;
+  }
+  /**
+   * Convert CSV to Object
+   * @param csv 
+   * @returns 
+   */
   csvToObject(csv: any) {
     // Split the CSV into rows
     const rows = csv.split('\n');

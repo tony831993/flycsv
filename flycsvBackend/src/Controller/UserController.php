@@ -25,7 +25,7 @@ class UserController extends AbstractController
             $user = $doctrine->getRepository(User::class)->findOneBy(array('username' => $parameters['username']), array('username' => 'ASC'),1 ,0);
             if(!$user) {
                 $resp = (object) [
-                    'message' => 'User doesn\'t exists with given username.',
+                    'error' => 'User doesn\'t exists with given username.',
                 ];
                 return $this->json($resp, 404);
             }
@@ -56,13 +56,13 @@ class UserController extends AbstractController
             $user = $doctrine->getRepository(User::class)->findOneBy(array('username' => $parameters['username']), array('username' => 'ASC'),1 ,0);
             if(!$user) {
                 $resp = (object) [
-                    'message' => 'User doesn\'t exists with given username.',
+                    'error' => 'User doesn\'t exists with given username.',
                 ];
                 return $this->json($resp, 404);
             }
             if(!isset($parameters['password']) || $parameters['password'] !== $user->getPassword()) {
                 $resp = (object) [
-                    'message' => 'Invalid username / password provided.',
+                    'error' => 'Invalid username / password provided.',
                 ];
                 return $this->json($resp, 401);
             }
@@ -73,7 +73,7 @@ class UserController extends AbstractController
             return $this->json($data);
         }
         $resp = (object) [
-            'message' => 'Invalid inputs provided.',
+            'error' => 'Invalid inputs provided.',
         ];
         return $this->json($resp, 404);
     }
@@ -87,7 +87,7 @@ class UserController extends AbstractController
         $existingUser = $doctrine->getRepository(User::class)->findOneBy(array('username' => $parameters['username']), array('username' => 'ASC'),1 ,0);
         if($existingUser && $existingUser->getId() !== 0) {
             $resp = (object) [
-                'message' => 'User already exists with provided username.',
+                'error' => 'User already exists with provided username.',
             ];
             return $this->json($resp, 500);
         }
@@ -117,7 +117,10 @@ class UserController extends AbstractController
     {
         $user = $doctrine->getRepository(User::class)->find($id);
         if (!$user) {
-            return $this->json('No user found for id: ' . $id, 404);
+            $resp = (object) [
+                'error' => 'User does not exist.',
+            ];
+            return $this->json($resp, 404);
         }
 
         $data =  [
@@ -139,7 +142,7 @@ class UserController extends AbstractController
         $user = $entityManager->getRepository(User::class)->find($id);
         if (!$user) {
             $resp = (object) [
-                'message' => 'No user found for given UserID'
+                'error' => 'User does not exist.',
             ];
             return $this->json($resp, 404);
         }
@@ -172,7 +175,7 @@ class UserController extends AbstractController
    
         if (!$user) {
             $resp = (object) [
-                'message' => 'No user found for given UserID'
+                'error' => 'User does not exist.',
             ];
             return $this->json($resp, 404);
         }

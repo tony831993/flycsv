@@ -13,8 +13,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     if (localStorage.getItem('user')) {
-      const user = localStorage.getItem('user')
-      this.user = JSON.parse((user) ? user : '');
+      this.user = this.authService.getLoggedInUser()
     }
   }
 

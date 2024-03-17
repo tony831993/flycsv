@@ -1,0 +1,38 @@
+<form>
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <h3>Employee Records</h3>
+            <div class="row my-3">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="search" class="form-control" [(ngModel)]="filter"
+                            [ngModelOptions]="{standalone: true}"
+                            placeholder="Filter by Employee ID, First Name, Last Name or Salary">
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2 records" *ngIf="records.length > 0">
+                <div class="col-sm-12">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" sortable="employee_id" (sort)="onSort($event)">#Employee ID</th>
+                                <th scope="col" sortable="firstname" (sort)="onSort($event)">First Name</th>
+                                <th scope="col" sortable="lastname" (sort)="onSort($event)">Last Name</th>
+                                <th scope="col" sortable="salary" (sort)="onSort($event)">Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let record of tableRecords | filterdata :filter">
+                                <th scope="row">{{ record.employee_id }}</th>
+                                <td>{{ record.firstname }}</td>
+                                <td>{{ record.lastname }}</td>
+                                <td>{{ record.salary | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> 
