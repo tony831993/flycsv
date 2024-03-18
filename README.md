@@ -55,14 +55,15 @@
 
 ## Development server
 
-Backend Application:
+Backend Application: Run in http://localhost:8000/
     - Navigate to ./flycsvBackend folder
     - Run `symfony server:start` for running symfony application.
+    - Runs in `http://localhost:8000/`
 
 Frontend Application: 
     - Navigate to ./flycsv-app folder
     - Run `ng serve` for a dev server. 
-    - Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    - Navigate to `http://localhost:4200/`.
 
 ## Assests 
     Root: 
