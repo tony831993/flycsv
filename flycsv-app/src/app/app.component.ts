@@ -13,16 +13,16 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     if (localStorage.getItem('user')) {
-      this.user = this.authService.getLoggedInUser()
+      const user = localStorage.getItem('user');
+      this.user = JSON.parse((user) ? user : '');
+      // this.user = this.authService.getLoggedInUser()
     }
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
-      this.authService.loggedInUser.subscribe((user) => {
-        this.user = user;
-      });
-    }
+    this.authService.loggedInUser.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   logout(): void {

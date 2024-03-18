@@ -20,10 +20,11 @@ services:
 
   db:
     image: mysql:latest
-    ports:
-      - "3306:3306"
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 
-      MYSQL_DATABASE: flycsv
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_DATABASE: 'flycsv'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'yourpassword'
+      MYSQL_ROOT_PASSWORD: 'yourpassword'
+    ports:
+      - '3306:3306'
