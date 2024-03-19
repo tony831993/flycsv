@@ -7,7 +7,7 @@
     
     Backend app has two main entities:
      a. User: It contains the of users in the application.
-     b. Employees: It contails the list of employees added by a user, by uploading the csv and saving the data parsed from csv. 
+     b. Employees: It contains the list of employees added by a user, by uploading the csv and saving the data parsed from csv. 
 
     Backend app has two controllers:
      a. UserController: It have REST endpoints exposed for login, creating, updating and deleting a user.
@@ -24,14 +24,16 @@
     This is frontend for the flycsv application, developed in Angular 16.0
 
     There is single module app.module (root module) in the application.
-     a. Login Component - Used by user to login in the application (username: admin, password: admin) 
-     b. Home Component - 
-        * After successfull login the user will land on the home component. Where user can upload a csv file (Sample file: ./employees.csv)
-        * Once the user selects the csv file. The data will be rendered on the same page where user can sort / filter the data by columns Employee ID, First Name, Last Name & Salary.
-        * User can view the records and can do two actions Save and Reset.
-            Save - Will save the records to employee data for the logged in user.
-            Reset - Will reset the uploaded csv and its data.
-     c. Records - This components is used to list the employee data saved by a user. User can sort / filter the data by columns Employee ID, First Name, Last Name & Salary.
+        a. Login Component - Used by user to login in the application (username: admin, password: admin) 
+        
+        b. Home Component - 
+            * After successful login the user will land on the home component. Where user can upload a csv file (Sample file: ./employees.csv)
+            * Once the user selects the csv file. The data will be rendered on the same page where user can sort / filter the data by columns Employee ID, First Name, Last Name & Salary.
+            * User can view the records and can do two actions Save and Reset.
+                Save - Will save the records to employee data for the logged in user.
+                Reset - Will reset the uploaded csv and its data.
+                
+        c. Records - This components is used to list the employee data saved by a user. User can sort / filter the data by columns Employee ID, First Name, Last Name & Salary.
 
     Application contains 3 routes:
         * /login
@@ -45,12 +47,15 @@
     Pipes :
         Created custom pipe for filtering table of employee based on columns.
 
-    3. MySQL Data
-        Database name - flycsv. It have two tables "user" and "employee".
+3. MySQL Database
+    DB name - flycsv 
+    It have two tables 
+        * user
+        * employee
 
-        The sql file for them are provided at root path
-            * ./flycsv_employee.sql
-            * ./flycsv_user.sql
+    The sql file for them are provided at root path
+        * ./flycsv_employee.sql
+        * ./flycsv_user.sql
 
 
 ## Development server

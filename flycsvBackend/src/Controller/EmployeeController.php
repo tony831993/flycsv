@@ -44,7 +44,7 @@ class EmployeeController extends AbstractController
             $records = json_decode($parameters['data']);
             foreach ($records as $record) {
                 $employee = new Employee();
-                $employee->setEmployeeID((int)$record->id);
+                $employee->setEmployeeID((int)$record->employee_id);
                 $employee->setUserId((int)$parameters['user_id']);
                 $employee->setFirstName($record->firstname);
                 $employee->setLastName($record->lastname);
@@ -53,7 +53,7 @@ class EmployeeController extends AbstractController
             }
             $entityManager->flush();
             $resp = (object) [
-                'message' => 'Rescords saved successfully.',
+                'message' => 'Records saved successfully.',
             ];
             return $this->json($resp);
         } catch(\Exception $ex){
