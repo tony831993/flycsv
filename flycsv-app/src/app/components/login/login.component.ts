@@ -28,18 +28,18 @@ export class LoginComponent implements OnInit {
   // On login
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const loginData = this.loginForm.value;
       this.overlayDisplay = true;
       this.loginError = false;
+      const loginData = this.loginForm.value;
 
       this.authService.login(loginData.username, loginData.password).subscribe((data: any) => {
         this.overlayDisplay = false;
         this.authService.loggedInUser.next(data)
         this.router.navigate(['home']);
       }, (error) => {
-        console.log(error);
         this.overlayDisplay = false;
         this.loginError = true;
+        console.error('Error:', error);
       });
     }
   }

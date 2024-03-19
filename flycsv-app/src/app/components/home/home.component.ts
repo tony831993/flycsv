@@ -117,7 +117,7 @@ export class HomeComponent {
     this.utilityService.saveCsvData(JSON.stringify(this.records)).subscribe((resp) => {
       this.alert = { type: 'success', message: 'Data saved successfuly.' }
       this.showAlert = true;
-      // this.hideAlert();
+      this.hideAlert();
       this.fileReset();
     }, (error) => {
       console.log(error);

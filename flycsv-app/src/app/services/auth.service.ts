@@ -25,7 +25,7 @@ export class AuthService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post<User>(environment.loginUrl, { username, password }, httpOptions)
+    return this.http.post(environment.loginUrl, { username, password }, httpOptions)
       .pipe(map((user) => {
         localStorage.setItem('user', JSON.stringify(user));
         return user;
