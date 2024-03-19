@@ -15,6 +15,8 @@ export class HomeComponent {
   @ViewChild('csvReader') csvReader: any;
   @ViewChildren(SortableHeaderDirective)
   headers!: QueryList<SortableHeaderDirective>;
+  alert: any = { type: 'warning', message: '' };
+  showAlert = false;
 
   constructor(private utilityService: UtilityService) {
 
@@ -102,12 +104,20 @@ export class HomeComponent {
       });
     }
   }
+
+  hideAlert() {
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000)
+  }
   /**
    * Save csv records
    */
   saveData() {
     this.utilityService.saveCsvData(JSON.stringify(this.records)).subscribe((resp) => {
-      console.log(resp)
+      this.alert = { type: 'success', message: 'Data saved successfuly.' }
+      this.showAlert = true;
+      // this.hideAlert();
       this.fileReset();
     }, (error) => {
       console.log(error);
