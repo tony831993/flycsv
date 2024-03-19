@@ -60,6 +60,10 @@
 
 ## Development server
 
+    Database: 
+        MySQL run/import in your local mysql database the .sql files mentioned(“./flycsv_employee.sql”  and “./flycsv_user.sql”). 
+        (This will create the necessary table, with `username: admin password: admin`)
+
     Backend Application: Run in `http://localhost:8000/`
         - Navigate to ./flycsvBackend folder
         - Run `symfony server:start` for running symfony application.
@@ -69,6 +73,7 @@
         - Navigate to ./flycsv-app folder
         - Run `ng serve` for a dev server. 
         - Navigate to `http://localhost:4200/`.
+        - Login the application using credential `username: admin password: admin`
 
 ## Assests 
     Root: 
