@@ -16,20 +16,18 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy composer.json and composer.lock
-COPY flycsvBackend/composer.json flycsvBackend/composer.lock ./
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+# RUN export PATH="$HOME/.symfony5/bin:$PATH"
+RUN cp $HOME/.symfony5/bin/symfony /usr/bin/symfony-cmd
+RUN chmod +x /usr/bin/symfony-cmd
+
+COPY . .
 
 # Install dependencies
-RUN composer install --no-scripts --no-autoloader
+RUN composer install -vvvvvv
 
-# Copy the rest of the application
-COPY flycsvBackend .
-
-# Install Composer dependencies with autoloader optimization
-RUN composer install --optimize-autoloader --no-dev
-
-# Expose port 9000
-EXPOSE 9000
+# Expose port 8000
+EXPOSE 8000
 
 # Start PHP-FPM
-CMD ["php-fpm"]
+ENTRYPOINT [ "/usr/bin/symfony-cmd", "server:start"]
