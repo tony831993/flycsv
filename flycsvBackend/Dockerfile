@@ -23,6 +23,9 @@ RUN chmod +x /usr/bin/symfony-cmd
 
 COPY . .
 
+# Generate autoload files
+RUN composer dump-autoload --optimize
+
 # Install dependencies
 RUN composer install -vvvvvv
 
@@ -31,6 +34,7 @@ EXPOSE 8000
 
 # Start PHP-FPM
 ENTRYPOINT [ "/usr/bin/symfony-cmd", "server:start", "--allow-http"]
+CMD ["php-fpm"]
 # CMD ["/usr/bin/symfony-cmd", "server:start", "--allow-http"]
 # CMD ["symfony", "server:start", "--allow-http"]
 
