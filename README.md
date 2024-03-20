@@ -57,6 +57,25 @@
         * ./flycsv_employee.sql
         * ./flycsv_user.sql
 
+## Run application via docker
+
+    1. Navigate to root in the github repository. Repo link (https://github.com/tony831993/flycsv)
+    2. Clone the repository.
+    3. Repository has a docker-compose file 
+        - https://github.com/tony831993/flycsv/blob/main/docker-compose.yml
+    4. Run `docker-compose up -d` this will generate the necessary images.
+    5. Application will be accessible on the below link
+        - http://localhost:4200/home
+        - Login Credentials - 
+            username: admin 
+            password: admin
+    6. After login :
+        1. User will redirect to Home screen.
+        2. Use sample csv to upload (https://github.com/tony831993/flycsv/blob/main/employees.csv).
+        3. On upload csv file user can see the csv data on same screen, with two action buttons `Save` & `Reset`.
+        4. Save - user can save the current data to backend database for the logged in user.
+        5. Reset - user can reset the csv data loaded.
+    7. View Records - is to show saved records for the user.
 
 ## Development server
 
@@ -80,3 +99,23 @@
     * employees.csv (Application is capable of reading with following structure of application)
     * ./flycsv_employee.sql
     * ./flycsv_user.sql
+
+## Run application via docker
+
+    1. Navigate to root in the github repository. Repo link (https://github.com/tony831993/flycsv)
+    2. Clone the repository.
+    3. Repository has a docker-compose file 
+        - https://github.com/tony831993/flycsv/blob/main/docker-compose.yml
+    4. Run `docker-compose up -d` this will generate the necessary images.
+    5. Application will be accessible on the below link
+        - http://localhost:4200/home
+        - Login Credentials - 
+            username: admin 
+            password: admin
+    6. After login :
+        1. User will redirect to Home screen.
+        2. Use sample csv to upload (https://github.com/tony831993/flycsv/blob/main/employees.csv).
+        3. On upload csv file user can see the csv data on same screen, with two action buttons `Save` & `Reset`.
+        4. Save - user can save the current data to backend database for the logged in user.
+        5. Reset - user can reset the csv data loaded.
+    7. View Records - is to show saved records for the user.

@@ -1,35 +1,32 @@
-version: '3'
-services:
-  mysql:
-      image: mysql:latest
-      restart: always
-      # command: --init-file /init.sql
-      # volumes:
-      #     - ./init.sql:/init.sql
-      environment:
-        MYSQL_DATABASE: 'flycsv'
-        MYSQL_USER: 'root123'
-        MYSQL_PASSWORD: 'root123'
-        MYSQL_ROOT_PASSWORD: 'root'
-      ports:
-        - '3307:3306'
-  
-  backend:
-    build: ./flycsvBackend
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./flycsvBackend:/app
-    links:
-      - mysql:mysql1
-    depends_on:
-      - mysql
+version: '3.8'
 
+services:
   frontend:
     build: ./flycsv-app
     ports:
       - "4200:80"
+
+  backend:
+    build: ./flycsvBackend
+    ports:
+      - "8000:8000"
+
+  mysql:
+    container_name: symfony_mysql
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    command: --init-file /init.sql
     volumes:
-      - ./flycsv-app:/app
-    depends_on:
-      - backend
+      - ./init.sql:/init.sql
+      - db_data:/var/lib/mysql
+    environment:
+      # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: 'flycsv'
+      MYSQL_USER: 'root123'
+      MYSQL_PASSWORD: 'root123'
+      MYSQL_ROOT_PASSWORD: 'root'
+
+volumes:
+  db_data:
