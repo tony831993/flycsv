@@ -6,6 +6,6 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
-!/vendor/autoload_runtime.php
+!*/vendor/autoload_runtime.php
 /vendor/
 ###< symfony/framework-bundle ###
