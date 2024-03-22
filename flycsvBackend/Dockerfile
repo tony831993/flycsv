@@ -27,15 +27,16 @@ COPY . .
 RUN composer dump-autoload --optimize
 
 # Install dependencies
-RUN composer install -vvvvvv
+RUN composer install
+# RUN composer update
 
 # Expose port 8000
 EXPOSE 8000
 
 # Start PHP-FPM
-ENTRYPOINT [ "/usr/bin/symfony-cmd", "server:start", "--allow-http"]
-CMD ["php-fpm"]
-# CMD ["/usr/bin/symfony-cmd", "server:start", "--allow-http"]
+# ENTRYPOINT [ "/usr/bin/symfony-cmd", "server:start"]
+# CMD ["php-fpm"]
+CMD ["/usr/bin/symfony-cmd", "server:start", "--allow-http"]
 # CMD ["symfony", "server:start", "--allow-http"]
 
 
